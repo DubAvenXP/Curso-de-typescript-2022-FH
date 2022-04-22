@@ -106,6 +106,94 @@ var __rest = (this && this.__rest) || function (s, e) {
     mystique = apocalipsis;
 })();
 (() => {
+    class Mutante {
+        constructor(name, realName) {
+            this.name = name;
+            this.realName = realName;
+        }
+    }
+    class Xmen extends Mutante {
+        salvarMundo() {
+            console.log(`${this.name} ha salvado al mundo`);
+        }
+    }
+    class Villian extends Mutante {
+        dominarMundo() {
+            console.log('Dominando el mundo');
+        }
+    }
+    const wolverine = new Xmen("Wolverine", "Logan");
+    const dominador = new Villian("Dominador", "Charles Francis Xavier");
+    const printName = (mutante) => {
+        console.log(mutante.realName);
+    };
+    printName(wolverine);
+    printName(dominador);
+})();
+(() => {
+    class Avenger {
+        constructor(name, team, realName) {
+            this.name = name;
+            this.team = team;
+            this.realName = realName;
+        }
+        static getAvgAge() {
+            return Avenger.avgAge;
+        }
+        bio() {
+            return `${this.name} is a member of the ${this.team} team`;
+        }
+    }
+    Avenger.avgAge = 30;
+    const antman = new Avenger("Antman", "Cap", "Scott Lang");
+    console.log(antman);
+})();
+(() => {
+    class Avenger {
+        constructor(name, realName) {
+            this.name = name;
+            this.realName = realName;
+        }
+        getFullName() {
+            return `${this.name} ${this.realName}`;
+        }
+        set setName(value) {
+            this.name = value;
+        }
+    }
+    class Xmen extends Avenger {
+        constructor(name, realName, isMutant) {
+            super(name, realName);
+            this.isMutant = isMutant;
+        }
+        get fullName() {
+            return this.getFullNameXmen();
+        }
+        getFullNameXmen() {
+            return super.getFullName();
+        }
+    }
+    const wolverine = new Xmen("Wolverine", "Logan", true);
+})();
+(() => {
+    class Apocalipsis {
+        constructor(name) {
+            this.name = name;
+        }
+        static callApocalipsis() {
+            if (!Apocalipsis.instance) {
+                Apocalipsis.instance = new Apocalipsis("Apocalipsis");
+            }
+            return Apocalipsis.instance;
+        }
+        changeName(newName) {
+            this.name = newName;
+        }
+    }
+    const apocalipsis = Apocalipsis.callApocalipsis();
+    apocalipsis.changeName("Apocalipsis 2");
+})();
+(() => {
     class Avenger {
         constructor(name, weapon) { }
     }
