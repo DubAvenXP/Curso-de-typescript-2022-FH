@@ -94,7 +94,7 @@
         antibalas: boolean;
         pasajeros: number;
         disparar?: () => void;
-    }
+    };
     // Objetos
     const batimovil: Car = {
         carroceria: "Negra",
@@ -118,7 +118,7 @@
         nombre: string;
         edad: number | undefined;
         mutante: boolean;
-    }
+    };
 
     // Villanos debe de ser un arreglo de objetos personalizados
     const villanos: Mutants[] = [
@@ -143,11 +143,11 @@
     type Charles = {
         poder: string;
         estatura: number;
-    }
+    };
     type Apocalipsis = {
         lider: boolean;
         miembros: string[];
-    }
+    };
     // cree dos tipos, uno para charles y otro para apocalipsis
     const charles: Charles = {
         poder: "psiquico",
@@ -164,4 +164,89 @@
 
     mystique = charles;
     mystique = apocalipsis;
+})();
+
+(() => {
+    // Crear interfaces
+    interface Auto {
+        encender: boolean;
+        velocidadMaxima: number;
+        acelerar(): void;
+    }
+    // Cree una interfaz para validar el auto (el valor enviado por parametro)
+    const conducirBatimovil = (auto: Auto): void => {
+        auto.encender = true;
+        auto.velocidadMaxima = 100;
+        auto.acelerar();
+    };
+
+    const batimovil: Auto = {
+        encender: false,
+        velocidadMaxima: 0,
+        acelerar() {
+            console.log("...... gogogo!!!");
+        },
+    };
+
+    // Cree una interfaz con que permita utilzar el siguiente objeto
+    // utilizando propiedades opcionales
+
+    interface Villian {
+        reir?: boolean;
+        comer?: boolean;
+        llorar?: boolean;
+    }
+
+    const guason = {
+        reir: true,
+        comer: true,
+        llorar: false,
+    };
+
+    const reir = (guason: Villian): void => {
+        if (guason.reir) {
+            console.log("JAJAJAJA");
+        }
+    };
+
+    // Cree una interfaz para la siguiente funcion
+
+    interface CiudadGotica {
+        (ciudadanos: string[]): number;
+    }
+
+    const ciudadGotica: CiudadGotica = (ciudadanos: string[]): number => {
+        return ciudadanos.length;
+    };
+
+    // Cree una interfaz que obligue crear una clase
+    // con las siguientes propiedades y metodos
+    interface Human {
+        nombre: string;
+        edad: number;
+        sexo: string;
+        estadoCivil: string;
+        imprimirBio(): void;
+    }
+    /*
+    propiedades:
+    - nombre
+    - edad
+    - sexo
+    - estadoCivil
+    - imprimirBio(): void // en consola una breve descripcion.
+  */
+    class Persona implements Human {
+        constructor(
+            public nombre: string,
+            public edad: number,
+            public sexo: string,
+            public estadoCivil: string
+        ) {}
+        imprimirBio(): void {
+            console.log(
+                `Hola, me llamo ${this.nombre} y tengo ${this.edad} años.`
+            );
+        }
+    }
 })();
