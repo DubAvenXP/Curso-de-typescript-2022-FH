@@ -1,4 +1,9 @@
-import { addProduct, getProducts } from "./products/product.service";
+import {
+    addProduct,
+    getProducts,
+    products,
+    updateProduct,
+} from "./products/product.service";
 
 import faker from "@faker-js/faker";
 
@@ -20,4 +25,13 @@ for (let i = 0; i < 10; i++) {
     });
 }
 
-console.log(getProducts());
+const product = products[0];
+updateProduct(product.id, {
+    name: "New name",
+    price: product.price + 999,
+});
+
+getProducts({
+    stock: 10,
+    color: "red",
+});

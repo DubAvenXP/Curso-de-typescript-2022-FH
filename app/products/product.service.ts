@@ -1,5 +1,5 @@
-import { Product } from "./product.model";
-import { CreateProductDto } from "./product.dto";
+import { Product } from './product.model';
+import { CreateProductDto, UpdateProductDto, FindProductDto } from './product.dto';
 import faker from "@faker-js/faker";
 
 export const products: Product[] = [];
@@ -21,19 +21,26 @@ export const addProduct = (data: CreateProductDto): Product => {
     return newProduct;
 };
 
-export const getProducts = (): Product[] => {
+export const getProducts = (query: FindProductDto): Product[] => {
+    // query.tags.pop();
     return products;
 };
 
-export const getProductById = (id: number): Product => {
+export const getProductById = (id: Product['id']): Product => {
     return products.find((product) => product.id === id);
 };
 
-export const updateProduct = (id: string, data: Product): void => {
-    products[id] = data;
+export const updateProduct = (id: Product['id'], changes: UpdateProductDto): Product => {
+    const index = products.findIndex((product) => product.id === id);
+    const prevData = products[index];
+    products[index] = {
+        ...prevData,
+        ...changes,
+    }
+    return products[index];
 };
 
-export const deleteProduct = (id: string): void => {
+export const deleteProduct = (id: Product['id']): void => {
     const index = products.findIndex((product) => product.id === id);
     products.splice(index, 1);
 };
